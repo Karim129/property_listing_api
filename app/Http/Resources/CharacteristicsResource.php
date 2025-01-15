@@ -8,14 +8,8 @@ class CharacteristicsResource extends JsonResource
 {
     public function toArray($request)
     {
-        return [
-            'price' => $this->price,
-            'bedrooms' => $this->bedrooms,
-            'bathrooms' => $this->bathrooms,
-            'sqft' => $this->sqft,
-            'price_sqft' => $this->price_sqft,
-            'property_type' => $this->property_type,
-            'status' => $this->status,
-        ];
+        return $this->only([
+            'price', 'bedrooms', 'bathrooms', 'sqft', 'price_sqft', 'property_type', 'status',
+        ]);
     }
 }

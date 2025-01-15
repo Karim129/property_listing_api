@@ -13,45 +13,30 @@ class BrokersController extends Controller
         return BrokersResource::collection(Broker::all());
     }
 
-    public function store(StoreBrokerRequest $request): \App\Http\Resources\BrokersResource
+    public function store(StoreBrokerRequest $request): BrokersResource
     {
-        $request->validated();
-
-        $broker = Broker::create([
-            'name' => $request->name,
-            'address' => $request->address,
-            'city' => $request->city,
-            'zip_code' => $request->zip_code,
-            'phone_number' => $request->phone_number,
-            'logo_path' => $request->logo_path,
-        ]);
-
-        return new BrokersResource($broker);
+        return new BrokersResource(Broker::create($request->validated()));
     }
 
-    public function show(Broker $broker): \App\Http\Resources\BrokersResource
+    public function show(Broker $broker): BrokersResource
     {
         return new BrokersResource($broker);
     }
 
-    public function update(StoreBrokerRequest $request, Broker $broker): \App\Http\Resources\BrokersResource
+    public function update(StoreBrokerRequest $request, Broker $broker): BrokersResource
     {
-        $request->validated();
-
-        $broker->update($request->only([
-            'name', 'address', 'city', 'zip_code', 'phone_number', 'logo_path',
-        ]));
+        $broker->update($request->validated());
 
         return new BrokersResource($broker);
     }
 
-    public function destroy(Broker $broker)
+    public function destroy(Broker $broker): \Illuminate\Http\JsonResponse
     {
-        $broker->delete();
+        $deleted = $broker->delete();
 
         return response()->json([
-            'success' => true,
-            'message' => 'Broker has been deleted from database',
+            'success' => $deleted,
+            'message' => $deleted ? 'Broker has been deleted from database' : 'Failed to delete broker',
         ]);
     }
 }

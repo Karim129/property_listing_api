@@ -18,19 +18,13 @@ class PropertyFactory extends Factory
     public function definition(): array
     {
         return [
-            'broker_id' => $this->faker->randomElement(Broker::get('id')),
-            'listing_type' => $this->faker->randomElement([
-                'Open Listing',
-                'Sell Listing',
-                'Exclusive Agency Listing',
-                'Net Listing',
-            ]),
+            'broker_id' => Broker::pluck('id')->random(),
+            'listing_type' => $this->faker->randomElement(['Open Listing', 'Sell Listing', 'Exclusive Agency Listing', 'Net Listing']),
             'city' => $this->faker->city(),
             'zip_code' => $this->faker->postcode(),
-            'description' => $this->faker->sentence,
-            'address' => $this->faker->address(),
+            'description' => $this->faker->sentence(),
+            'address' => $this->faker->streetAddress(),
             'build_year' => $this->faker->year(),
-
         ];
     }
 }

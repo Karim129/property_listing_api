@@ -16,36 +16,22 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-        return PropertiesResource::collection(Property::all());
+        return PropertiesResource::collection(Property::paginate(15));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePropertyRequest $request): \App\Http\Resources\PropertiesResource
+    public function store(StorePropertyRequest $request): PropertiesResource
     {
-        $request->validated();
+        $validatedData = $request->validated();
 
-        $property = Property::create([
-            'broker_id' => $request->broker_id,
-            'address' => $request->address,
-            'listing_type' => $request->listing_type,
-            'city' => $request->city,
-            'zip_code' => $request->zip_code,
-            'description' => $request->description,
-            'build_year' => $request->build_year,
-        ]);
+        $property = Property::create($validatedData);
 
-        $property->characteristic()->create([
-            'property_id' => $property->id,
-            'price' => $request->price,
-            'bedrooms' => $request->bedrooms,
-            'bathrooms' => $request->bathrooms,
-            'sqft' => $request->sqft,
-            'price_sqft' => $request->price_sqft,
-            'property_type' => $request->property_type,
-            'status' => $request->status,
-        ]);
+        $property->characteristic()->create(array_merge(
+            ['property_id' => $property->id],
+            $validatedData
+        ));
 
         return new PropertiesResource($property);
     }
@@ -53,7 +39,7 @@ class PropertiesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Property $property): \App\Http\Resources\PropertiesResource
+    public function show(Property $property): PropertiesResource
     {
         return new PropertiesResource($property);
     }
@@ -61,15 +47,17 @@ class PropertiesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Property $property): \App\Http\Resources\PropertiesResource
+    public function update(Request $request, Property $property): PropertiesResource
     {
-        $property->update($request->only([
+        $property->fill($request->only([
             'broker_id', 'address', 'listing_type', 'city', 'zip_code', 'description', 'build_year',
         ]));
 
-        $property->characteristic->where('property_id', $property->id)->update($request->only([
-            'property_id', 'price', 'bedrooms', 'bathrooms', 'sqft', 'price_sqft', 'property_type', 'status',
+        $property->characteristic->fill($request->only([
+            'price', 'bedrooms', 'bathrooms', 'sqft', 'price_sqft', 'property_type', 'status',
         ]));
+
+        $property->push();
 
         return new PropertiesResource($property);
     }

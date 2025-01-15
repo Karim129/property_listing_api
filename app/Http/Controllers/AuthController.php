@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Request;
 
 class AuthController extends Controller
 {
@@ -56,7 +57,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        Auth::user()->currentAccessToken()->delete();
+        Request::user()->tokens()->delete();
 
         return $this->success([
             'message' => 'You have succesfully been logged out and your token has been removed',
