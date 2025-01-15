@@ -8,10 +8,8 @@ class StoreBrokerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,7 +19,7 @@ class StoreBrokerRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => [$this->isPostRequest(), 'unique:users', 'max:255', $this->id],
@@ -33,7 +31,7 @@ class StoreBrokerRequest extends FormRequest
         ];
     }
 
-    private function isPostRequest()
+    private function isPostRequest(): string
     {
         return request()->isMethod('post') ? 'required' : 'sometimes';
     }

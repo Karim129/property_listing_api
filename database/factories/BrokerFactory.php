@@ -18,11 +18,11 @@ class BrokerFactory extends Factory
     {
         return [
             'name' => fake()->company(),
-            'address'=> fake()->address(),
-            'city'=> fake()->city(),
-            'zip_code'=> fake()->postcode(),
-            'phone_number'=> fake()->phoneNumber(),
-            'logo_path'=> fake()->imageUrl(),
+            'address' => fake()->address(),
+            'city' => fake()->city(),
+            'zip_code' => fake()->postcode(),
+            'phone_number' => fake()->phoneNumber(),
+            'logo_path' => fake()->imageUrl(),
         ];
     }
 }

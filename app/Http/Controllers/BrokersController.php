@@ -13,7 +13,7 @@ class BrokersController extends Controller
         return BrokersResource::collection(Broker::all());
     }
 
-    public function store(StoreBrokerRequest $request)
+    public function store(StoreBrokerRequest $request): \App\Http\Resources\BrokersResource
     {
         $request->validated();
 
@@ -29,12 +29,12 @@ class BrokersController extends Controller
         return new BrokersResource($broker);
     }
 
-    public function show(Broker $broker)
+    public function show(Broker $broker): \App\Http\Resources\BrokersResource
     {
         return new BrokersResource($broker);
     }
 
-    public function update(StoreBrokerRequest $request, Broker $broker)
+    public function update(StoreBrokerRequest $request, Broker $broker): \App\Http\Resources\BrokersResource
     {
         $request->validated();
 

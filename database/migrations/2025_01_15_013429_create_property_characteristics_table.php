@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('property_characteristics', function (Blueprint $table) {
+        Schema::create('property_characteristics', function (Blueprint $table): void {
             $table->foreignId('property_id')->constrained('properties')->onDelete('cascade');
             $table->float('price');
             $table->integer('bedrooms');
@@ -32,7 +32,7 @@ return new class extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('property_characteristics');
     }

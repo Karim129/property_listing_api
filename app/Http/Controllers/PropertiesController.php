@@ -21,10 +21,8 @@ class PropertiesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return PropertiesResource
      */
-    public function store(StorePropertyRequest $request)
+    public function store(StorePropertyRequest $request): \App\Http\Resources\PropertiesResource
     {
         $request->validated();
 
@@ -54,20 +52,16 @@ class PropertiesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @return PropertiesResource
      */
-    public function show(Property $property)
+    public function show(Property $property): \App\Http\Resources\PropertiesResource
     {
         return new PropertiesResource($property);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return PropertiesResource
      */
-    public function update(Request $request, Property $property)
+    public function update(Request $request, Property $property): \App\Http\Resources\PropertiesResource
     {
         $property->update($request->only([
             'broker_id', 'address', 'listing_type', 'city', 'zip_code', 'description', 'build_year',

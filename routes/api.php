@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:sanctum')->get('/user', fn (Request $request) => $request->user());
 
 // Public routes
 Route::post('/login', [AuthController::class, 'login']);
@@ -30,7 +28,7 @@ Route::get('/properties', [BrokersController::class, 'index'])->name('brokers.in
 Route::get('/properties/{property}', [BrokersController::class, 'show'])->name('brokers.show');
 
 // Protected routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum']], function (): void {
     Route::apiResource('/brokers', BrokersController::class)->only(['store', 'update', 'destroy']);
     Route::apiResource('/properties', PropertiesController::class)->only(['store', 'update', 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);

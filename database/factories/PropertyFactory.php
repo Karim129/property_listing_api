@@ -5,8 +5,6 @@ namespace Database\Factories;
 use App\Models\Broker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-use function Illuminate\Support\enum_value;
-
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Property>
  */
@@ -25,14 +23,13 @@ class PropertyFactory extends Factory
                 'Open Listing',
                 'Sell Listing',
                 'Exclusive Agency Listing',
-                'Net Listing'
+                'Net Listing',
             ]),
-            'city'=> $this->faker->city(),
-            'zip_code'=> $this->faker->postcode(),
-            'description'=> $this->faker->sentence,
-            'address'=> $this->faker->address(),
-            'build_year'=> $this->faker->year(),
-
+            'city' => $this->faker->city(),
+            'zip_code' => $this->faker->postcode(),
+            'description' => $this->faker->sentence,
+            'address' => $this->faker->address(),
+            'build_year' => $this->faker->year(),
 
         ];
     }

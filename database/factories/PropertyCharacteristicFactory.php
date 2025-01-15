@@ -18,14 +18,14 @@ class PropertyCharacteristicFactory extends Factory
     public function definition(): array
     {
         return [
-            'property_id'=> $this->faker->randomElement(Property::get('id')),
-            'price'=> $this->faker->randomFloat(2,0,0),
-            'bedrooms'=> $this->faker->numberBetween(2,0),
-            'bathrooms'=> $this->faker->numberBetween(2,0),
-            'sqft'=> $this->faker->randomFloat(2,10,0),
-            'price_sqft'=> $this->faker->randomFloat(2,0),
-            'property_type'=> $this->faker->randomElement(['Single-family Home', 'Townhouse', 'Multi-family Home', 'Bungalow']),
-            'status'=> $this->faker->randomElement(['Sold', 'On Sale', 'On Hold']),
+            'property_id' => $this->faker->randomElement(Property::get('id')),
+            'price' => $this->faker->randomFloat(2, 0, 0),
+            'bedrooms' => $this->faker->numberBetween(2, 0),
+            'bathrooms' => $this->faker->numberBetween(2, 0),
+            'sqft' => $this->faker->randomFloat(2, 10, 0),
+            'price_sqft' => $this->faker->randomFloat(2, 0),
+            'property_type' => $this->faker->randomElement(['Single-family Home', 'Townhouse', 'Multi-family Home', 'Bungalow']),
+            'status' => $this->faker->randomElement(['Sold', 'On Sale', 'On Hold']),
         ];
     }
 }
