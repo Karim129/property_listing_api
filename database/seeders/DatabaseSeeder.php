@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Broker;
+use App\Models\Property;
+use App\Models\PropertyCharacteristic;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::factory(10)->create();
+        Broker::factory(10)->create();
+        Property::factory(10)->create();
+        PropertyCharacteristic::factory(10)->create();
     }
 }

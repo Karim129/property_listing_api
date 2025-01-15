@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('zip_code')->unique();
-            $table->integer('phone_number')->unique();
+            $table->string('phone_number')->unique();
             $table->string('logo_path');
             $table->timestamps();
 

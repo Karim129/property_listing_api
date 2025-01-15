@@ -11,12 +11,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('property_characteristics', function (Blueprint $table) {
-            $table->foreignId('property_id')->constrained('properties')->onDelete('cascade')->unique();
-            $table->float('price')->required();
-            $table->integer('bedrooms')->required();
-            $table->integer('bathrooms')->required();
-            $table->float('sqft')->required();
-            $table->float('price_sqft')->required();
+            $table->foreignId('property_id')->constrained('properties')->onDelete('cascade');
+            $table->float('price');
+            $table->integer('bedrooms');
+            $table->integer('bathrooms');
+            $table->float('sqft');
+            $table->float('price_sqft');
             $table->enum('property_type', [
                 PropertyTypeEnum::SINGLE->value,
                 PropertyTypeEnum::TOWNHOUSE->value,
@@ -27,9 +27,8 @@ return new class extends Migration
                 PropertyStatusEnum::SOLD->value,
                 PropertyStatusEnum::SALE->value,
                 PropertyStatusEnum::HOLD->value,
-            ])->default(PropertyStatusEnum::HOLD->value)->required();
+            ])->default(PropertyStatusEnum::HOLD->value);
             $table->timestamps();
-
         });
     }
 
