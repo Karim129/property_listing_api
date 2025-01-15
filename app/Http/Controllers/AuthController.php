@@ -13,6 +13,9 @@ class AuthController extends Controller
 {
     use HttpResponses;
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(LoginUserRequest $request)
     {
         $request->validated($request->only(['email', 'password']));
@@ -29,6 +32,9 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(StoreUserRequest $request)
     {
         $request->validated($request->only(['name', 'email', 'password']));
@@ -45,6 +51,9 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout()
     {
         Auth::user()->currentAccessToken()->delete();
