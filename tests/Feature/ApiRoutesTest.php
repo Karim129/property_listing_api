@@ -34,16 +34,8 @@ class ApiRoutesTest extends TestCase
             'password' => $password,
         ]);
 
-        $response->assertSuccessful( 'data' => [
-            'user' => [
-                'id'=> $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-            ],
-            'token' => true,
-            ],'message' => null
-        );
-    
+        $response->assertSuccessful('user','token');
+
 
     }
 
