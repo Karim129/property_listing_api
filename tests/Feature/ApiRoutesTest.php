@@ -2,30 +2,29 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Broker;
 use App\Models\Property;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ApiRoutesTest extends TestCase
 {
     use RefreshDatabase;
 
-
     /** @test */
-    public function it_can_access_user_route_with_authentication()
+    public function it_can_access_user_route_with_authentication(): void
     {
         $user = User::factory()->create();
 
         $this->assertAuthenticatedAs($user, 'sanctum')
-             ->getJson('/api/user')
-             ->assertSuccessful()
-             ->assertJson(['id' => $user->id]);
+            ->getJson('/api/user')
+            ->assertSuccessful()
+            ->assertJson(['id' => $user->id]);
     }
 
     /** @test */
-    public function it_can_login()
+    public function it_can_login(): void
     {
         $user = User::factory()->create(['password' => bcrypt($password = 'password')]);
 
@@ -34,13 +33,12 @@ class ApiRoutesTest extends TestCase
             'password' => $password,
         ]);
 
-        $response->assertSuccessful('user','token');
-
+        $response->assertSuccessful();
 
     }
 
     /** @test */
-    public function it_can_register()
+    public function it_can_register(): void
     {
         $faker = \Faker\Factory::create();
         $name = $faker->name;
@@ -55,20 +53,20 @@ class ApiRoutesTest extends TestCase
         ]);
 
         $response->assertSuccessful()
-                 ->assertJson([
-                     'data' => [
-                         'user' => [
-                             'name' => $name,
-                             'email' => $email,
-                         ],
-                         'token' => true,
-                     ],
-                     'message' => null,
-                 ]);
+            ->assertJson([
+                'data' => [
+                    'user' => [
+                        'name' => $name,
+                        'email' => $email,
+                    ],
+                    'token' => true,
+                ],
+                'message' => null,
+            ]);
     }
 
     /** @test */
-    public function it_can_access_public_brokers_routes()
+    public function it_can_access_public_brokers_routes(): void
     {
         $broker = Broker::factory()->create();
 
@@ -80,7 +78,7 @@ class ApiRoutesTest extends TestCase
     }
 
     /** @test */
-    public function it_can_access_public_properties_routes()
+    public function it_can_access_public_properties_routes(): void
     {
         $property = Property::factory()->create();
 
@@ -92,7 +90,7 @@ class ApiRoutesTest extends TestCase
     }
 
     /** @test */
-    public function it_can_access_protected_brokers_routes_with_authentication()
+    public function it_can_access_protected_brokers_routes_with_authentication(): void
     {
         $user = User::factory()->create();
 
@@ -105,7 +103,7 @@ class ApiRoutesTest extends TestCase
     }
 
     /** @test */
-    public function it_can_access_protected_properties_routes_with_authentication()
+    public function it_can_access_protected_properties_routes_with_authentication(): void
     {
         $user = User::factory()->create();
 
@@ -118,7 +116,7 @@ class ApiRoutesTest extends TestCase
     }
 
     /** @test */
-    public function it_can_logout()
+    public function it_can_logout(): void
     {
         $user = User::factory()->create();
 
